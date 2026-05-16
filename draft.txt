@@ -1,0 +1,47 @@
+Step 1 – Data Quality
+
+Shape, dtypes, null rate
+Duplicate rows
+Target distribution (churn rate)
+
+Step 2 – Univariate
+
+Numeric: histogram, mean/std/min/max, skewness
+Categorical: value counts, tỉ lệ %
+
+Step 3 – Bivariate vs target (churn)
+
+Numeric: KDE overlay churn=0 vs churn=1, boxplot, mean theo group
+Categorical: churn rate theo từng category
+tính thêm một số chỉ số quan trọng tổng số phút gọi, chi phí số phút ...
+Xem các chỉ số liên quan quốc tế giữa 2 nhóm churn và non churn nhé => xem thử chi phí từng phút của 2 nhóm khách
+Tương tự với day, nightm evening
+
+
+Step 4 – IV (Information Value)
+
+Tính IV cho từng feature vs churn
+Drop feature có IV < 0.02 (useless)
+Ưu tiên feature có IV > 0.1 cho modeling
+
+Step 5 – Multivariate
+
+Correlation matrix (numeric)
+Phát hiện multicollinearity (vd: total_day_minutes vs total_day_charge)
+
+Step 6 – Feature Engineering
+
+Drop redundant features (charge = minutes × rate → giữ 1)
+Encode categorical (Yes/No → 0/1)
+Xử lý outlier nếu cần
+
+Step 7 – Train/Val/Test split
+
+Stratify theo churn
+Check PSI nếu time-based split
+
+Step 8 – Train model
+
+Baseline (Logistic Regression hoặc simple tree)
+Sau đó CatBoost/LightGBM
+Eval: AUC, F1, Precision/Recall curve
